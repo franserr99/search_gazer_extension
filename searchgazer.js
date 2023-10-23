@@ -10801,7 +10801,8 @@ if (typeof exports !== 'undefined') {
     var domelement = document.elementFromPoint(x,y);
     if (domelement!=null) {
       //known dom elements
-      while(domelement!= null && domelement.parentNode!=null && (domelement.className!="rc" && domelement.className!="g" && domelement.className!="_KBh" && domelement.id!="brs" && domelement.id!="hdtbSum" && domelement.className!="ads-ad" && domelement.className!="c _oc commercial-unit-desktop-rhs rhsvw" && domelement.className!="_OKe")){
+      while(domelement!= null && domelement.parentNode!=null && (domelement.id.match("rso") && 
+      domelement.id.match("g") && domelement.className!="_KBh" && domelement.id!="brs" && domelement.id!="hdtbSum" && domelement.className!="ads-ad" && domelement.className!="c _oc commercial-unit-desktop-rhs rhsvw" && domelement.className!="_OKe")){
         domelement = domelement.parentNode;
       }
       if(domelement == null || domelement.nodeName=="#document"){
@@ -10810,7 +10811,8 @@ if (typeof exports !== 'undefined') {
       var value = domelement.className;
 
       //organic results
-      if(value.match("rc") || value.match("g")){
+      
+      if(domelement.id.match("rso") || domelement.id.match("g")){
         domelement = domelement.parentNode;
         var olddomelement = domelement;
         //within the same _NId block
