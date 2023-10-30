@@ -77,9 +77,10 @@ console.log("reading data on this page");
 
 // stop recording after 10s and save the log to a file
 setTimeout(function() {
-    webgazer.end();  //stop the process
     saveToFile(); // call helper fxn
-}, 20000);
+    webgazer.end();  //stop the process
+    
+}, 10000);
 
 // saving to file
 function saveToFile() {
@@ -87,7 +88,7 @@ function saveToFile() {
     const link = document.createElement("a");
     const url = URL.createObjectURL(blob);
     link.setAttribute("href", url);
-    link.setAttribute("download", "consoleLogs.txt");
+    link.setAttribute("download", "logs.txt");
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
     link.click();

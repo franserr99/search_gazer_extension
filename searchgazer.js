@@ -10797,66 +10797,44 @@ if (typeof exports !== 'undefined') {
 }(window));
 
   findDomElementGoogle = function(x,y){
-    
-    var domelement = document.elementFromPoint(x,y);
-    if (domelement!=null) {
-      //known dom elements
-      while(domelement!= null && domelement.parentNode!=null && (domelement.id.match("rso") && 
-      domelement.id.match("g") && domelement.className!="_KBh" && domelement.id!="brs" && domelement.id!="hdtbSum" && domelement.className!="ads-ad" && domelement.className!="c _oc commercial-unit-desktop-rhs rhsvw" && domelement.className!="_OKe")){
-        domelement = domelement.parentNode;
-      }
-      if(domelement == null || domelement.nodeName=="#document"){
-        return "unknown";
-      }
-      var value = domelement.className;
+    // Get the element at the specified coordinates.
+    const element = document.elementFromPoint(x, y);
+    if(element.id.match("rcnt")||element.className.match("GyAeWb") || element.id.match("rso")){
+      return;
+    }
 
-      //organic results
-      
-      if(domelement.id.match("rso") || domelement.id.match("g")){
-        domelement = domelement.parentNode;
-        var olddomelement = domelement;
-        //within the same _NId block
-        var i = 0;
-        while( (domelement = domelement.previousSibling) != null ){
-          i++;
-        }
-        //add the previous results
-        var j=0;
-        olddomelement = olddomelement.parentNode.parentNode;
-        while( (olddomelement = olddomelement.previousSibling) != null ){
-          if(olddomelement.className == "_NId" && olddomelement.firstChild.className == "srg"){
-            j+= olddomelement.firstChild.childNodes.length;
+    console.log("Element ID:", element.id);
+    console.log("Element Class:", element.className);
+    console.log("Element Tag:", element.tagName);
+    console.log("built in api elemnt:",element)
+    // Check if the element is a known Google search result element.
+    const knownElementTypes = ["rso", "g", "_KBh", "hdtbSum", "brs",
+                               "_OKe", "GyAeWb","VuuXrf"];
+    const knownLeafs= ["kb0PBd","cvP2Ce","ieodic","LnCrMe","jGGQ5e","yuRUbf","LicuJb" ,"uhHOwf", "BYbUcd","L3Ezfd","","mgAbYb","OSrXXb"]; 
+    const knownResultNames=["MjjYud"];
+    const knownResultContainerNames=["GyAeWb"];
+
+    if (element != null) {
+      if (knownLeafs.some((type) => element.id.match(type) || element.className.match(type))) {
+        var parent_node = element.parentNode;
+        while (true) { // Using a break condition within the loop to exit
+          if (parent_node.className === knownResultNames[0] || parent_node.id === knownResultNames[0]) {
+            console.log("Found the parent node:", parent_node);
+            console.log("Element ID:", parent_node.id);
+            console.log("Element Class:", parent_node.className);
+            console.log("Element Tag:", parent_node.tagName);
+            break;
+          }
+          parent_node = parent_node.parentNode;
+          if (parent_node == null || parent_node === document) { // Reached the root without finding
+            console.log("Could not find the parent node with the desired name.");
+            break;
           }
         }
-        return "result " + (i+j+1);
-      }
-      else if(value.match("_KBh")){
-        return "top stories";
-      }
-      else if(domelement.id.match("hdtbSum")){
-        return "top bar";
-      }
-      else if(domelement.id.match("brs")){
-        return "bottom related searches";
-      }
-      else if(value.match("ads-ad")){
-        var number = domelement.dataset.hveid;
-        if (number!=undefined)
-          return "ad " + number;
-        return "ad";
-      }
-      else if(value.match("c _oc commercial-unit-desktop-rhs rhsvw")){
-        return "right ad";
-      }
-      else if(value.match("_OKe")){
-        return "right info panel";
-      }
-      else{
-        return "unknown";
       }
     }
-    else return "out of bounds";
-};
+  };
+  
 
   findDomElementBing = function(x,y){
     
