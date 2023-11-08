@@ -10795,45 +10795,82 @@ if (typeof exports !== 'undefined') {
         return eventTypes.slice(); 
     }
 }(window));
+  // Check if the element is a known Google search result element.
+  // const knownElementTypes = ["rso", "g", "_KBh", "hdtbSum", "brs",
+  //                            "_OKe", "GyAeWb","VuuXrf"];
+  // const knownResultContainerNames=["GyAeWb"];
+  const knownLeafs= ["kb0PBd","cvP2Ce","ieodic","LnCrMe","jGGQ5e","yuRUbf","LicuJb" ,"uhHOwf", "BYbUcd","L3Ezfd","","mgAbYb","OSrXXb"]; 
+  // found this when trying to add coverage for the 
+  // "People also asked section" (jsname is a nonstandard attribute)
+  const knownJSNameLeafs = ['yEVEwb','YrZdPb','yEVEwb','clz4Ic'];
+  const knownJSNameRoots= ['N760b'];
+  const knownQAClassOrIDLeafs= ['CSkcDe','ZwRhJd','JCzEY','JlqpRe','dnXCYb','dnXCYb','related-question-pair'];
+  const knownResultNames=["MjjYud"];
+
 
   findDomElementGoogle = function(x,y){
-    // Get the element at the specified coordinates.
+    // get the element at the specified coordinates
     const element = document.elementFromPoint(x, y);
-    if(element.id.match("rcnt")||element.className.match("GyAeWb") || element.id.match("rso")){
-      return;
-    }
+    // top level container, cant get info from it
+    if(isTopLevelContainer(element))
+      return null;
+    if(gotMatch(element))
+      return element;
 
+    console.log("built in api elemnt:",element);
+    logElement(element);
+    
+    if (element != null) {
+      //element id or class name matches any of the known leafs
+      if (knownLeafs.some((type) => element.id.match(type) || element.className.match(type))) {
+        //go up the tree
+        var parent_node = element.parentNode;
+        while (true) { 
+          // keep going till top or match
+          if(gotMatch(parent_node))
+            break;
+          parent_node = parent_node.parentNode;
+          if(reachedRootOrFailed(parent_node))
+            break;
+        }
+      }
+    }else{ 
+      return null;
+    }
+    // logic to go down into the node
+
+
+    return parent_node;
+  };
+  logElement= function(element){ 
     console.log("Element ID:", element.id);
     console.log("Element Class:", element.className);
     console.log("Element Tag:", element.tagName);
-    console.log("built in api elemnt:",element)
-    // Check if the element is a known Google search result element.
-    const knownElementTypes = ["rso", "g", "_KBh", "hdtbSum", "brs",
-                               "_OKe", "GyAeWb","VuuXrf"];
-    const knownLeafs= ["kb0PBd","cvP2Ce","ieodic","LnCrMe","jGGQ5e","yuRUbf","LicuJb" ,"uhHOwf", "BYbUcd","L3Ezfd","","mgAbYb","OSrXXb"]; 
-    const knownResultNames=["MjjYud"];
-    const knownResultContainerNames=["GyAeWb"];
+  }
 
-    if (element != null) {
-      if (knownLeafs.some((type) => element.id.match(type) || element.className.match(type))) {
-        var parent_node = element.parentNode;
-        while (true) { // Using a break condition within the loop to exit
-          if (parent_node.className === knownResultNames[0] || parent_node.id === knownResultNames[0]) {
-            console.log("Found the parent node:", parent_node);
-            console.log("Element ID:", parent_node.id);
-            console.log("Element Class:", parent_node.className);
-            console.log("Element Tag:", parent_node.tagName);
-            break;
-          }
-          parent_node = parent_node.parentNode;
-          if (parent_node == null || parent_node === document) { // Reached the root without finding
-            console.log("Could not find the parent node with the desired name.");
-            break;
-          }
-        }
-      }
+  isTopLevelContainer= function(node){
+    if(node.id.match("rcnt")||node.className.match("GyAeWb") || node.id.match("rso")){
+      return true;
     }
-  };
+    return false
+
+  }
+  gotMatch = function(node) {
+    if (node.className === knownResultNames[0] || node.id === knownResultNames[0]) {
+      console.log("Found the parent node:", node);
+      logElement(node);
+      return true;
+    }
+    return false;
+  }
+  reachedRootOrFailed= function ( node){
+    if (node == null || node === document) { 
+      //reached root, failed
+      console.log("Could not find the parent node with the desired name.");
+      return true;
+    }
+
+  }
   
 
   findDomElementBing = function(x,y){
