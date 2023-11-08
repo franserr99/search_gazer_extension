@@ -10822,7 +10822,7 @@ if (typeof exports !== 'undefined') {
     
     if (element != null) {
       //element id or class name matches any of the known leafs
-      if (knownLeafs.some((type) => element.id.match(type) || element.className.match(type))) {
+      if (knownLeafMatch(element)) {
         //go up the tree
         var parent_node = element.parentNode;
         while (true) { 
@@ -10842,6 +10842,35 @@ if (typeof exports !== 'undefined') {
 
     return parent_node;
   };
+  knownLeafMatch= function(element){
+    if(searchResultLeafMatch(element))
+      return true;
+    else if(peopleAlsoAskedLeafMatch(element))
+      return true;
+    else
+      return false;
+
+  };
+  peopleAlsoAskedLeafMatch= function(element){
+    const matchesAnyType = (attributeValue) => {
+      // split then iterate over the array
+      const values = attributeValue.split(' ');
+      return values.some(value => knownQAClassOrIDLeafs.includes(value) || knownJSNameLeafs.includes(value));
+    };
+    return matchesAnyType(element.id) || matchesAnyType(element.className) || matchesAnyType(element.jsname);
+
+  }
+  searchResultLeafMatch = function(element) {
+    // helper function to test if any of the types match a given attribute value
+    const matchesAnyType = (attributeValue) => {
+      // split then iterate over the array
+      const values = attributeValue.split(' ');
+      return values.some(value => knownLeafs.includes(value));
+    };
+  
+    // matches either
+    return matchesAnyType(element.id) || matchesAnyType(element.className);
+  }
   logElement= function(element){ 
     console.log("Element ID:", element.id);
     console.log("Element Class:", element.className);
