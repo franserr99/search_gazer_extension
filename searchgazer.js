@@ -10885,7 +10885,13 @@ if (typeof exports !== 'undefined') {
 
   }
   gotMatch = function(node) {
-    if (node.className === knownResultNames[0] || node.id === knownResultNames[0]) {
+    const matchesAnyType = (attributeValue) => {
+      // split then iterate over the array
+      const values = attributeValue.split(' ');
+      return values.some(value => knownResultNames.includes(value));
+    };
+
+    if (matchesAnyType(node.className) || matchesAnyType(node.id)) {
       console.log("Found the parent node:", node);
       logElement(node);
       return true;
