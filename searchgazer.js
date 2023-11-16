@@ -10805,7 +10805,35 @@ if (typeof exports !== 'undefined') {
   const knownJSNameLeafs = ['yEVEwb','YrZdPb','yEVEwb','clz4Ic'];
   const knownJSNameRoots= ['N760b'];
   const knownQAClassOrIDLeafs= ['CSkcDe','ZwRhJd','JCzEY','JlqpRe','dnXCYb','dnXCYb','related-question-pair'];
-  const knownResultNames=["MjjYud"];
+  const knownResultNames=["MjjYud"]; 
+
+  function findH3Values(htmlString) {
+    const regex = /<h3[^>]*>(.*?)<\/h3>/g;
+    const matches = [];
+    let match;
+  
+    while ((match = regex.exec(htmlString)) !== null) {
+      matches.push(match[1]);
+    }
+    console.log(matches);
+  
+    return matches;
+  }
+
+  //checks the element for the content and the url that may or may not be inbedded in it 
+function findContentAndUrl(element) {
+  var content = element.textContent || element.innerText;
+
+  // Find URLs within the content
+  var urls = [];
+  var linkElements = element.querySelectorAll('a');
+  linkElements.forEach(function (link) {
+      urls.push(link.getAttribute('href'));
+  });
+
+  console.log('Element Content:', content.trim());
+  console.log('Embedded URLs:', urls);
+}
 
 
   findDomElementGoogle = function(x,y){
@@ -10816,8 +10844,9 @@ if (typeof exports !== 'undefined') {
       return null;
     if(gotMatch(element))
       return element;
-
+    
     console.log("built in api elemnt:",element);
+    findContentAndUrl(element);
     logElement(element);
     
     if (element != null) {
