@@ -10802,9 +10802,11 @@ if (typeof exports !== 'undefined') {
   const knownLeafs= ["kb0PBd","cvP2Ce","ieodic","LnCrMe","jGGQ5e","yuRUbf","LicuJb" ,"uhHOwf", "BYbUcd","L3Ezfd","","mgAbYb","OSrXXb"]; 
   // found this when trying to add coverage for the 
   // "People also asked section" (jsname is a nonstandard attribute)
-  const knownJSNameLeafs = ['yEVEwb','YrZdPb','yEVEwb','clz4Ic'];
-  const knownJSNameRoots= ['N760b'];
-  const knownQAClassOrIDLeafs= ['CSkcDe','ZwRhJd','JCzEY','JlqpRe','dnXCYb','dnXCYb','related-question-pair'];
+  const knownJSNameLeafs = ['YrZdPb','clz4Ic', 'NRdf4c', 'oQYOj'];
+  // 'MjjYud' is a top level container as well for people also asked section
+  const knownAQRoots= ['N760b', 'bq0EGf', 'MjjYud', 'yEVEwb'];
+  const knownQAClassOrIDLeafs= ['CSkcDe','ZwRhJd','JCzEY','JlqpRe',
+                            'dnXCYb','dnXCYb','related-question-pair', 'NRdf4c','bCOlv' ,'MgN2vf', 'GdN4W', 'd0fCJc', 'IZE3Td', 'wQiwMc'];
   const knownResultNames=["MjjYud"];
 
 
@@ -10817,8 +10819,8 @@ if (typeof exports !== 'undefined') {
     if(gotMatch(element))
       return element;
 
-    console.log("built in api elemnt:",element);
-    logElement(element);
+    // console.log("Built in api elemnt: ", element);
+    // logElement(element);
     
     if (element != null) {
       //element id or class name matches any of the known leafs
@@ -10843,23 +10845,29 @@ if (typeof exports !== 'undefined') {
     return parent_node;
   };
   knownLeafMatch= function(element){
-    if(searchResultLeafMatch(element))
+    if(searchResultLeafMatch(element)){ 
+      console.log("A regular search result was found:")
       return true;
-    else if(peopleAlsoAskedLeafMatch(element))
+    } 
+    else if(peopleAlsoAskedLeafMatch(element)) {
+      console.log("A 'People also asked' section was found")
       return true;
+    }
     else
       return false;
 
   };
-  peopleAlsoAskedLeafMatch= function(element){
+  peopleAlsoAskedLeafMatch = function(element) {
     const matchesAnyType = (attributeValue) => {
-      // split then iterate over the array
-      const values = attributeValue.split(' ');
-      return values.some(value => knownQAClassOrIDLeafs.includes(value) || knownJSNameLeafs.includes(value));
+      if (attributeValue) {
+        const values = attributeValue.split(' ');
+        return values.some(value => knownQAClassOrIDLeafs.includes(value) || knownJSNameLeafs.includes(value));
+      }
     };
-    return matchesAnyType(element.id) || matchesAnyType(element.className) || matchesAnyType(element.jsname);
-
+  
+    return matchesAnyType(element.id?.trim()) || matchesAnyType(element.className?.trim()) || matchesAnyType(element.jsname?.trim());
   }
+  
   searchResultLeafMatch = function(element) {
     // helper function to test if any of the types match a given attribute value
     const matchesAnyType = (attributeValue) => {
@@ -10869,12 +10877,13 @@ if (typeof exports !== 'undefined') {
     };
   
     // matches either
-    return matchesAnyType(element.id) || matchesAnyType(element.className);
+    return matchesAnyType(element.id?.trim()) || matchesAnyType(element.className?.trim());
   }
   logElement= function(element){ 
-    console.log("Element ID:", element.id);
+    console.log("\nElement ID:", element.id);
     console.log("Element Class:", element.className);
     console.log("Element Tag:", element.tagName);
+    console.log("********");
   }
 
   isTopLevelContainer= function(node){
