@@ -10795,10 +10795,6 @@ if (typeof exports !== 'undefined') {
         return eventTypes.slice(); 
     }
 }(window));
-  // Check if the element is a known Google search result element.
-  // const knownElementTypes = ["rso", "g", "_KBh", "hdtbSum", "brs",
-  //                            "_OKe", "GyAeWb","VuuXrf"];
-  // const knownResultContainerNames=["GyAeWb"];
   const knownLeafs= ["kb0PBd","cvP2Ce","ieodic","LnCrMe","jGGQ5e","yuRUbf","LicuJb" ,"uhHOwf", "BYbUcd","L3Ezfd","","mgAbYb","OSrXXb"]; 
   // found this when trying to add coverage for the 
   // "People also asked section" (jsname is a nonstandard attribute)
@@ -10809,8 +10805,10 @@ if (typeof exports !== 'undefined') {
                             'dnXCYb','dnXCYb','related-question-pair', 'NRdf4c','bCOlv' ,'MgN2vf', 'GdN4W', 'd0fCJc', 'IZE3Td', 'wQiwMc'];
   const knownResultNames=["MjjYud"];
 
+  findDomElementBooks = function(x,y){
+    // https://www.amazon.com/Childrens-Books/b/?ie=UTF8&node=4&ref_=sv_b_6
+    // i included the html for one of the wheels 
 
-  findDomElementGoogle = function(x,y){
     // get the element at the specified coordinates
     const element = document.elementFromPoint(x, y);
     // top level container, cant get info from it
@@ -10818,14 +10816,10 @@ if (typeof exports !== 'undefined') {
       return null;
     if(gotMatch(element))
       return element;
-
-    // console.log("Built in api elemnt: ", element);
-    // logElement(element);
-    
     if (element != null) {
-      //element id or class name matches any of the known leafs
+      // element id or class name matches any of the known leafs
       if (knownLeafMatch(element)) {
-        //go up the tree
+        // go up the tree
         var parent_node = element.parentNode;
         while (true) { 
           // keep going till top or match
@@ -10839,36 +10833,35 @@ if (typeof exports !== 'undefined') {
     }else{ 
       return null;
     }
-    // logic to go down into the node
-
-
+    
+    // logic to extract the info 
     return parent_node;
   };
   knownLeafMatch= function(element){
-    if(searchResultLeafMatch(element)){ 
-      console.log("A regular search result was found:")
+    if(bookCardMatch(element)){ 
+      console.log("Book Card:")
       return true;
     } 
-    else if(peopleAlsoAskedLeafMatch(element)) {
-      console.log("A 'People also asked' section was found")
-      return true;
-    }
-    else
-      return false;
+    // else if(peopleAlsoAskedLeafMatch(element)) {
+    //   console.log("A 'People also asked' section was found")
+    //   return true;
+    // }
+    // else
+    //   return false;
 
   };
-  peopleAlsoAskedLeafMatch = function(element) {
-    const matchesAnyType = (attributeValue) => {
-      if (attributeValue) {
-        const values = attributeValue.split(' ');
-        return values.some(value => knownQAClassOrIDLeafs.includes(value) || knownJSNameLeafs.includes(value));
-      }
-    };
+  // peopleAlsoAskedLeafMatch = function(element) {
+  //   const matchesAnyType = (attributeValue) => {
+  //     if (attributeValue) {
+  //       const values = attributeValue.split(' ');
+  //       return values.some(value => knownQAClassOrIDLeafs.includes(value) || knownJSNameLeafs.includes(value));
+  //     }
+  //   };
   
-    return matchesAnyType(element.id?.trim()) || matchesAnyType(element.className?.trim()) || matchesAnyType(element.jsname?.trim());
-  }
+  //   return matchesAnyType(element.id?.trim()) || matchesAnyType(element.className?.trim()) || matchesAnyType(element.jsname?.trim());
+  // }
   
-  searchResultLeafMatch = function(element) {
+  bookCardMatch = function(element) {
     // helper function to test if any of the types match a given attribute value
     const matchesAnyType = (attributeValue) => {
       // split then iterate over the array
@@ -10880,10 +10873,10 @@ if (typeof exports !== 'undefined') {
     return matchesAnyType(element.id?.trim()) || matchesAnyType(element.className?.trim());
   }
   logElement= function(element){ 
-    console.log("\nElement ID:", element.id);
-    console.log("Element Class:", element.className);
-    console.log("Element Tag:", element.tagName);
-    console.log("********");
+    // create some csv of what gets printed out
+    // make it easy to create the vectors for it 
+    // element ID, element class, element tag 
+    console.log(element.id, ",", element.className, ",",element.tagName );
   }
 
   isTopLevelContainer= function(node){
@@ -10899,9 +10892,8 @@ if (typeof exports !== 'undefined') {
       const values = attributeValue.split(' ');
       return values.some(value => knownResultNames.includes(value));
     };
-
     if (matchesAnyType(node.className) || matchesAnyType(node.id)) {
-      console.log("Found the parent node:", node);
+      // found the parent node
       logElement(node);
       return true;
     }
@@ -10913,7 +10905,6 @@ if (typeof exports !== 'undefined') {
       console.log("Could not find the parent node with the desired name.");
       return true;
     }
-
   }
   
 
