@@ -18,7 +18,7 @@ webgazer.setRegression('ridge')
             try {
                 console.log(findBookCardElement(xprediction, yprediction, elapsedTime));
             } catch (error) {
-                console.log("Error:", error);
+                // console.log("Error:", error);
             }
         }
         ).begin()
