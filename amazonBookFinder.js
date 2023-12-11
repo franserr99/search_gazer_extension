@@ -13,12 +13,6 @@ const topLevelContainers = [
   "a-section octopus-pc-card octopus-best-seller-card",
 ];
 
-// utility function to check if an element matches any type in a given array.
-const matchesAnyType = (attributeValue, types) => {
-  const values = attributeValue.split(" ");
-  return values.some((value) => types.includes(value));
-};
-
 // find the book card element from given coordinates.
 // this is the main functions others will use
 const findBookCardElement = (x, y) => {
@@ -29,8 +23,19 @@ const findBookCardElement = (x, y) => {
 
   return findParentNodeMatch(element);
 };
+// -----------------------------------------------------------------------------------------
+// -------------------------------- HELPER FUNCTIONS ---------------------------------------
+// -----------------------------------------------------------------------------------------
 
-// find the matching parent node.
+// takes an arr and some value, checks if that is in the value
+const matchesAnyType = (attributeValue, types) => {
+  // split by space, in html you can have more than one class name or id
+  // each will be delim by some space
+  const values = attributeValue.split(" ");
+  return values.some((value) => types.includes(value));
+};
+
+// main logic to iterate up the dom tree
 const findParentNodeMatch = (element) => {
   if (isKnownLeaf(element)) {
     let parentNode = element.parentNode;
@@ -45,8 +50,7 @@ const findParentNodeMatch = (element) => {
   }
   return null;
 };
-
-// check if the element is a known leaf node.
+// leaf we can iterate up from
 const isKnownLeaf = (element) => {
   return (
     matchesAnyType(element.id?.trim(), knownSubTreeLeafs) ||
@@ -54,7 +58,7 @@ const isKnownLeaf = (element) => {
   );
 };
 
-// check if the element is a top level container.
+// too high in the DOM tree to get meaningful info
 const isTopLevelContainer = (node) => {
   return (
     matchesAnyType(node.className?.trim(), topLevelContainers) ||
@@ -62,7 +66,7 @@ const isTopLevelContainer = (node) => {
   );
 };
 
-// check if the node matches the target subtree root.
+// the subtree root we are looking for
 const isTargetSubtreeRoot = (node) => {
   return (
     matchesAnyType(node.className?.trim(), knownSubTreeRoots) ||
@@ -73,8 +77,6 @@ const isTargetSubtreeRoot = (node) => {
 // check if the traversal has reached the root or failed to find a match.
 const isRootOrFailed = (node) => {
   if (!node || node === document) {
-    // log for debugging but dont log for the output text file
-    // console.log("Could not find the parent node with the desired name.");
     return true;
   }
   return false;
@@ -84,6 +86,9 @@ const isRootOrFailed = (node) => {
 const logElement = (element) => {
   console.log(element.id, ",", element.className, ",", element.tagName);
 };
+// ------------------------------------------------------------------------------------------------
+// -------------------------------- END OF HELPER FUNCTIONS ---------------------------------------
+// ------------------------------------------------------------------------------------------------
 
 // ------------------ OLD STUFF FROM WHEN WE ADAPTED TO GOOGLE RESULTS --------------------------
 // peopleAlsoAskedLeafMatch = function(element) {
