@@ -5795,7 +5795,7 @@ var objectdetect = (function () {
    * tracking.track('#video', tracker, { camera: true });
    *
    * tracker.on('track', function(event) {
-   *   // console.log(event.data[0].x, event.data[0].y)
+   *   // console.info(event.data[0].x, event.data[0].y)
    * });
    *
    * @param {HTMLElement} element The element to track, canvas, image or
@@ -18088,7 +18088,7 @@ function mosseFilter(params) {
     // finds position of filter in input image
 
     if (!_filter) {
-      console.log(
+      console.info(
         "Mosse-filter needs to be initialized or trained before starting tracking."
       );
       return false;
@@ -18210,7 +18210,7 @@ function mosseFilter(params) {
 
     if (updateFilter) {
       if (!updateable) {
-        console.log(
+        console.info(
           "The loaded filter does not support updating. Ignoring parameter 'updateFilter'."
         );
       } else {
@@ -18273,7 +18273,7 @@ function mosseFilter(params) {
 
   this.train = function (input, left, top, width, height) {
     if (!updateable) {
-      console.log(
+      console.info(
         "The loaded filter does not support updating. Unable to do training."
       );
       return false;
@@ -59768,7 +59768,7 @@ var clm = {
         mossef_nose = new mosseFilter();
         mossef_nose.load(nose_filter);
       } else {
-        console.log(
+        console.info(
           "MOSSE filters not found, using rough approximation for initialization."
         );
       }
@@ -59942,7 +59942,7 @@ var clm = {
     this.start = function (element, box) {
       // check if model is initalized, else return false
       if (typeof model === "undefined") {
-        console.log("tracker needs to be initalized before starting to track.");
+        console.info("tracker needs to be initalized before starting to track.");
         return false;
       }
       //check if a runnerelement already exists, if not, use passed parameters
@@ -60273,7 +60273,7 @@ var clm = {
           pnsq_y = currentPositions[k][1] - oldPositions[k][1];
           positionNorm += pnsq_x * pnsq_x + pnsq_y * pnsq_y;
         }
-        //console.log("positionnorm:"+positionNorm);
+        //console.info("positionnorm:"+positionNorm);
 
         // if norm < limit, then break
         if (positionNorm < convergenceLimit) {
@@ -60442,20 +60442,20 @@ var clm = {
     this.setResponseMode = function (mode, list) {
       // clmtrackr must be initialized with model first
       if (typeof model === "undefined") {
-        console.log(
+        console.info(
           "Clmtrackr has not been initialized with a model yet. No changes made."
         );
         return;
       }
       // must check whether webGL or not
       if (typeof webglFi === "undefined") {
-        console.log(
+        console.info(
           "Responsemodes are only allowed when using webGL. In pure JS, only 'raw' mode is available."
         );
         return;
       }
       if (["single", "blend", "cycle"].indexOf(mode) < 0) {
-        console.log(
+        console.info(
           "Tried to set an unknown responsemode : '" +
             mode +
             "'. No changes made."
@@ -60463,14 +60463,14 @@ var clm = {
         return;
       }
       if (!(list instanceof Array)) {
-        console.log(
+        console.info(
           "List in setResponseMode must be an array of strings! No changes made."
         );
         return;
       } else {
         for (var i = 0; i < list.length; i++) {
           if (["raw", "sobel", "lbp"].indexOf(list[i]) < 0) {
-            console.log(
+            console.info(
               "Unknown element in responsemode list : '" +
                 list[i] +
                 "'. No changes made."
@@ -60478,12 +60478,12 @@ var clm = {
           }
           // check whether filters are initialized
           if (list[i] == "sobel" && sobelInit == false) {
-            console.log(
+            console.info(
               "The sobel filters have not been initialized! No changes made."
             );
           }
           if (list[i] == "lbp" && lbpInit == false) {
-            console.log(
+            console.info(
               "The LBP filters have not been initialized! No changes made."
             );
           }
@@ -62445,7 +62445,7 @@ var webglFilter = function () {
     var dist = max - min;
 
     if (dist == 0) {
-      console.log(
+      console.info(
         "a patchresponse was monotone, causing normalization to fail. Leaving it unchanged."
       );
       response = response.map(function () {
@@ -62500,8 +62500,8 @@ var webglFilter = function () {
    * @param {string} msg The message to log.
    */
   var log = function (msg) {
-    if (window.console && window.console.log) {
-      window.console.log(msg);
+    if (window.console && window.console.info) {
+      window.console.info(msg);
     }
   };
 
@@ -62513,8 +62513,8 @@ var webglFilter = function () {
     if (window.console) {
       if (window.console.error) {
         window.console.error(msg);
-      } else if (window.console.log) {
-        window.console.log(msg);
+      } else if (window.console.info) {
+        window.console.info(msg);
       }
     }
     throw msg;
@@ -62864,7 +62864,7 @@ var svmFilter = function () {
           yOffset = j < edge ? (fft_size-edge) : (-edge);
           flar_fi0[k+xOffset+((j+yOffset)*fft_size)] = filter_input[i][k+(j*filterWidth)];*/
 
-          //console.log(k + ","+ j+":" + (k+xOffset+((j+yOffset)*fft_size)))
+          //console.info(k + ","+ j+":" + (k+xOffset+((j+yOffset)*fft_size)))
         }
       }
 
@@ -63013,7 +63013,7 @@ var svmFilter = function () {
     var dist = max - min;
 
     if (dist == 0) {
-      console.log(
+      console.info(
         "a patchresponse was monotone, causing normalization to fail. Leaving it unchanged."
       );
     } else {
@@ -63428,7 +63428,7 @@ var mosseFilterResponses = function () {
     var dist = max - min;
 
     if (dist == 0) {
-      console.log(
+      console.info(
         "a patchresponse was monotone, causing normalization to fail. Leaving it unchanged."
       );
       response = response.map(function () {
@@ -63606,12 +63606,12 @@ var mosseFilterResponses = function () {
     rightHeight = Math.round(rightBox[3] - rightBox[1]);
 
     if (leftWidth == 0 || rightWidth == 0) {
-      console.log("an eye patch had zero width");
+      console.info("an eye patch had zero width");
       return null;
     }
 
     if (leftHeight == 0 || rightHeight == 0) {
-      console.log("an eye patch had zero height");
+      console.info("an eye patch had zero height");
       return null;
     }
 
@@ -63708,7 +63708,7 @@ var mosseFilterResponses = function () {
     }
 
     var eyes = this.detectEyes(workingImage, width, height);
-    console.log(eyes);
+    console.info(eyes);
     if (eyes == null) {
       return null;
     }
@@ -63747,7 +63747,7 @@ var mosseFilterResponses = function () {
     };
 
     if (leftImageData.width == 0 || rightImageData.width == 0) {
-      console.log("an eye patch had zero width");
+      console.info("an eye patch had zero width");
       return null;
     }
 
@@ -63802,7 +63802,7 @@ var mosseFilterResponses = function () {
       });
       return eyes;
     } else {
-      console.log("tracking.js could not detect two eyes in the video");
+      console.info("tracking.js could not detect two eyes in the video");
       return null;
     }
   };
@@ -63959,7 +63959,7 @@ var mosseFilterResponses = function () {
     };
 
     if (leftImageData.width == 0 || rightImageData.width == 0) {
-      console.log("an eye patch had zero width");
+      console.info("an eye patch had zero width");
       return null;
     }
 
@@ -64010,7 +64010,7 @@ var mosseFilterResponses = function () {
       });
       return eyes;
     } else {
-      console.log("js_objectdetect could not detect two eyes in the video");
+      console.info("js_objectdetect could not detect two eyes in the video");
       return null;
     }
   };
@@ -64313,7 +64313,7 @@ var mosseFilterResponses = function () {
    */
   self.webgazer.mat.mult = function (matrix1, matrix2) {
     if (matrix2.length != matrix1[0].length) {
-      console.log("Matrix inner dimensions must agree.");
+      console.info("Matrix inner dimensions must agree.");
     }
 
     var X = new Array(matrix1.length),
@@ -64405,11 +64405,11 @@ var mosseFilterResponses = function () {
       }
     }
     if (B.length != m) {
-      console.log("Matrix row dimensions must agree.");
+      console.info("Matrix row dimensions must agree.");
     }
     for (var j = 0; j < n; j++) {
       if (LU[j][j] == 0) {
-        console.log("Matrix is singular.");
+        console.info("Matrix is singular.");
       }
     }
     var nx = B[0].length;
@@ -64489,10 +64489,10 @@ var mosseFilterResponses = function () {
       Rdiag[k] = -nrm;
     }
     if (B.length != m) {
-      console.log("Matrix row dimensions must agree.");
+      console.info("Matrix row dimensions must agree.");
     }
     for (var j = 0; j < n; j++) {
-      if (Rdiag[j] == 0) console.log("Matrix is rank deficient");
+      if (Rdiag[j] == 0) console.info("Matrix is rank deficient");
     }
     // Copy right hand side
     var nx = B[0].length;
@@ -65017,7 +65017,7 @@ var mosseFilterResponses = function () {
             ? m_Coefficients.length / m_Coefficients.length
             : 0;
         if (m_Coefficients.length * n != m_Coefficients.length) {
-          console.log("Array length must be a multiple of m");
+          console.info("Array length must be a multiple of m");
         }
         solution =
           ss.length == ss[0].length
@@ -65030,7 +65030,7 @@ var mosseFilterResponses = function () {
         success = true;
       } catch (ex) {
         k *= 10;
-        console.log(ex);
+        console.info(ex);
         success = false;
       }
     } while (!success);
@@ -65240,7 +65240,7 @@ var mosseFilterResponses = function () {
             ? m_Coefficients.length / m_Coefficients.length
             : 0;
         if (m_Coefficients.length * n != m_Coefficients.length) {
-          console.log("Array length must be a multiple of m");
+          console.info("Array length must be a multiple of m");
         }
         solution =
           ss.length == ss[0].length
@@ -65253,7 +65253,7 @@ var mosseFilterResponses = function () {
         success = true;
       } catch (ex) {
         k *= 10;
-        console.log(ex);
+        console.info(ex);
         success = false;
       }
     } while (!success);
@@ -65497,7 +65497,7 @@ var mosseFilterResponses = function () {
   }
 
   function updateWeights(event) {
-    console.log(event.data);
+    console.info(event.data);
     this.weights = event.data;
   }
 
@@ -65515,7 +65515,7 @@ var mosseFilterResponses = function () {
 
     this.worker = new Worker("ridgeWorker.js");
     this.worker.onerror = function (err) {
-      console.log(err.message);
+      console.info(err.message);
     };
     this.worker.onmessage = function (event) {
       weights = event.data;
@@ -65541,11 +65541,11 @@ var mosseFilterResponses = function () {
   };
 
   webgazer.reg.RidgeRegThreaded.prototype.predict = function (eyesObj) {
-    console.log("in predict1");
+    console.info("in predict1");
     if (!eyesObj) {
       return null;
     }
-    console.log(weights);
+    console.info(weights);
     var coefficientsX = weights.X;
     var coefficientsY = weights.Y;
 
@@ -65902,7 +65902,7 @@ var mosseFilterResponses = function () {
   };
 })();
 (function (window, undefined) {
-  console.log("initializing webgazer");
+  console.info("initializing webgazer");
   //strict mode for type safety
   ("use strict");
 
@@ -66020,7 +66020,7 @@ var mosseFilterResponses = function () {
         curTracker.getEyePatches(canvas, width, height)
       );
     } catch (err) {
-      console.log(err);
+      console.info(err);
       return null;
     }
   }
@@ -66056,7 +66056,7 @@ var mosseFilterResponses = function () {
       webgazer.params.imgHeight
     );
     if (regs.length == 0) {
-      console.log("regression not set, call setRegression()");
+      console.info("regression not set, call setRegression()");
       return null;
     }
     for (var reg in regs) {
@@ -66124,7 +66124,7 @@ var mosseFilterResponses = function () {
       webgazer.params.imgHeight
     );
     if (regs.length == 0) {
-      console.log("regression not set, call setRegression()");
+      console.info("regression not set, call setRegression()");
       return null;
     }
     for (var reg in regs) {
@@ -66219,7 +66219,7 @@ var mosseFilterResponses = function () {
     videoElement = document.createElement("video");
     videoElement.id = webgazer.params.videoElementId;
     videoElement.autoplay = true;
-    console.log(videoElement);
+    // console.info(videoElement);
     videoElement.style.display = "none";
 
     //turn the stream into a magic URL
@@ -66270,11 +66270,11 @@ var mosseFilterResponses = function () {
       navigator.getUserMedia(
         options,
         function (stream) {
-          console.log("video stream created");
+          console.info("video stream created");
           init(stream);
         },
         function (e) {
-          console.log("No stream");
+          console.info("No stream");
           videoElement = null;
         }
       );
@@ -66347,7 +66347,7 @@ var mosseFilterResponses = function () {
       document.body.removeChild(videoElement);
       document.body.removeChild(videoElementCanvas);
     } catch (err) {
-      console.log(err.message);
+      console.info(err.message);
     }
     setGlobalData();
     return webgazer;
@@ -66427,10 +66427,10 @@ var mosseFilterResponses = function () {
    */
   webgazer.setTracker = function (name) {
     if (curTrackerMap[name] == undefined) {
-      console.log("Invalid tracker selection");
-      console.log("Options are: ");
+      console.info("Invalid tracker selection");
+      console.info("Options are: ");
       for (var t in curTrackerMap) {
-        console.log(t);
+        console.info(t);
       }
       return webgazer;
     }
@@ -66445,10 +66445,10 @@ var mosseFilterResponses = function () {
    */
   webgazer.setRegression = function (name) {
     if (regressionMap[name] == undefined) {
-      console.log("Invalid regression selection");
-      console.log("Options are: ");
+      console.info("Invalid regression selection");
+      console.info("Options are: ");
       for (var reg in regressionMap) {
-        console.log(reg);
+        console.info(reg);
       }
       return webgazer;
     }
@@ -66652,7 +66652,7 @@ const logElement = (element,  x, y, time) => {
   const id = element.id  ?? " ";
   const className = element.className ?? " ";
   const tagName = String(element.tagName) ?? " ";
-  // console.log(x,",",y,",",time ,",",id,",", className, ",", tagName);
+  // console.info(x,",",y,",",time ,",",id,",", className, ",", tagName);
   console.log(x,y,time,id, className , tagName);
 };
 
