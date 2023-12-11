@@ -1,0 +1,150 @@
+x, y, timeElapsed, id, className, tagName
+video stream created
+[object HTMLVideoElement]
+105, 180, 2261.5, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+97, 155, 2347.3999999910593, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+96, 155, 2382.8999999910593, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+122, 191, 2465.5, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+170, 304, 2627.3999999910593, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+193, 341, 2648.5, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+198, 352, 2683.699999988079, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+209, 371, 2708.3999999910593, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+239, 401, 2743.199999988079, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+247, 413, 2767.3999999910593, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+262, 415, 2806.3999999910593, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+268, 426, 2830.699999988079, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+297, 423, 2865.8999999910593, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+306, 443, 2889.8999999910593, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+291, 432, 2927.2999999970198, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+136, 115, 4422.399999991059, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+344, 313, 4479.699999988079, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+345, 316, 4501.699999988079, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+436, 364, 4591.29999999702, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+162, 128, 4612.79999999702, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+168, 134, 4671.29999999702, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+411, 399, 4768.0999999940395, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+349, 309, 4790.79999999702, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+413, 412, 4826.29999999702, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+357, 353, 4849.5999999940395, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+406, 380, 4886.899999991059, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+417, 376, 4909.199999988079, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+507, 473, 4944.899999991059, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+457, 331, 6247.29999999702, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+728, 514, 6509.0999999940395, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+183, 125, 6567.79999999702, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+591, 380, 6603.0999999940395, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+639, 416, 6626.79999999702, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+587, 374, 6661.5, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+721, 474, 6682.899999991059, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+721, 474, 6704.5, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+806, 534, 6748.79999999702, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+840, 556, 6769.699999988079, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+828, 549, 6807.5, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+784, 519, 6831, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+666, 430, 6866.79999999702, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+659, 428, 6888.199999988079, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+678, 441, 6911, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+648, 416, 6932.29999999702, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+755, 490, 6954.79999999702, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+666, 428, 6990, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+692, 449, 7012.199999988079, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+608, 392, 7049.29999999702, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+608, 392, 7074, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+647, 431, 7114.199999988079, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+[object HTMLLIElement]
+475, 330, 8380.39999999106, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+116, 77, 8460.89999999106, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+620, 405, 8496.29999999702, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+480, 312, 8518, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+570, 367, 8553.89999999106, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+556, 358, 8576.199999988079, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+598, 397, 8669.29999999702, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+526, 341, 8703, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+544, 357, 8742, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+615, 396, 8762.699999988079, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+647, 407, 8795.39999999106, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+627, 398, 8815.39999999106, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+586, 373, 8851.199999988079, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+586, 373, 8871.39999999106, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+651, 412, 8906.09999999404, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+664, 422, 8927, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+650, 412, 8981.59999999404, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+650, 412, 9001.199999988079, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+647, 413, 9021.89999999106, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+573, 371, 9041.89999999106, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+573, 371, 9063.29999999702, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+628, 405, 9082.5, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
+628, 405, 9103.29999999702, , octopus-pc-item octopus-pc-item-v3, LI
+[object HTMLLIElement]
