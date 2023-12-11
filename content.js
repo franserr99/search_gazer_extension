@@ -3,7 +3,7 @@ let logData = [];
 console.log = function() {
     logData.push(Array.from(arguments).join(', '));
 };
-
+console.log("x, y, timeElapsed, id, className, tagName");
 webgazer.setRegression('ridge')
         .setTracker('clmtrackr')
         .setGazeListener(function(data, elapsedTime) {
@@ -14,19 +14,15 @@ webgazer.setRegression('ridge')
             //console.log("hardcoded prediction:", findDomElementGoogle(100, 100));
             var xprediction = data.x;
             var yprediction = data.y;
-            console.log("the elapsed time:", elapsedTime);
-            console.log("X:", xprediction, "Y:", yprediction);
-            console.log("\nthe dom element prediction:");
+            
             try {
-                console.log(findBookCardElement(xprediction, yprediction));
+                console.log(findBookCardElement(xprediction, yprediction, elapsedTime));
             } catch (error) {
                 console.log("Error:", error);
             }
         }
         ).begin()
         .showPredictionPoints(true);
-
-console.log("reading data on this page");
 
 // stop recording after 10s and save the log to a file
 setTimeout(function() {
@@ -37,7 +33,9 @@ setTimeout(function() {
 
 // saving to file
 function saveToFile() {
-    const blob = new Blob([logData.join('\n')], { type: 'text/plain;charset=utf-8' });
+    // const blob = new Blob([logData.join('\n')], { type: 'text/plain;charset=utf-8' });
+    const filteredLogData = logData.filter(line => line.trim() !== '');
+    const blob = new Blob([filteredLogData.join('\n')], { type: 'text/plain;charset=utf-8' });
     const link = document.createElement("a");
     const url = URL.createObjectURL(blob);
     link.setAttribute("href", url);

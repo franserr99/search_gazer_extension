@@ -66569,13 +66569,13 @@ const topLevelContainers = [
 ];
 // find the book card element from given coordinates.
 // this is the main functions others will use
-findBookCardElement = (x, y) => {
+findBookCardElement = (x, y, time) => {
   const element = document.elementFromPoint(x, y);
-  if (isTopLevelContainer(element) || !element) return null;
+  if (!element  ||isTopLevelContainer(element) ) return null;
 
   if (isTargetSubtreeRoot(element)) return element;
 
-  return findParentNodeMatch(element);
+  return findParentNodeMatch(element, x, y, time);
 };
 /**
  * Note: octopus-pc-card-title is one of the tags you can target to get info on what the wheel was about
@@ -66588,6 +66588,7 @@ findBookCardElement = (x, y) => {
 
 // takes an arr and some value, checks if that is in the value
 const matchesAnyType = (attributeValue, types) => {
+  if (!attributeValue) return false;
   // split by space, in html you can have more than one class name or id
   // each will be delim by some space
   const values = attributeValue.split(" ");
@@ -66595,7 +66596,7 @@ const matchesAnyType = (attributeValue, types) => {
 };
 
 // main logic to iterate up the dom tree
-const findParentNodeMatch = (element) => {
+const findParentNodeMatch = (element,  x, y, time) => {
   if (isKnownLeaf(element)) {
     let parentNode = element.parentNode;
     while (
@@ -66604,10 +66605,10 @@ const findParentNodeMatch = (element) => {
       !isRootOrFailed(parentNode)
     ) {
       parentNode = parentNode.parentNode;
-      
+
     }
     if(parentNode){
-      logElement(parentNode);
+      logElement(parentNode,  x, y, time);
     }
     return parentNode;
   }
@@ -66647,11 +66648,12 @@ const isRootOrFailed = (node) => {
 };
 
 // Logging function for elements.
-const logElement = (element) => {
-  const id = element.id ?? " ";
+const logElement = (element,  x, y, time) => {
+  const id = element.id  ?? " ";
   const className = element.className ?? " ";
-  const tagName = element.tagName ?? " ";
-  console.log(id, ",", className, ",", tagName);
+  const tagName = String(element.tagName) ?? " ";
+  // console.log(x,",",y,",",time ,",",id,",", className, ",", tagName);
+  console.log(x,y,time,id, className , tagName);
 };
 
 findDomElementBing = function (x, y) {
