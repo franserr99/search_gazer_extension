@@ -3,7 +3,7 @@ let logData = [];
 console.log = function() {
     logData.push(Array.from(arguments).join(', '));
 };
-console.log("x, y, timeElapsed, id, className, tagName");
+console.log("x, y, timeElapsed, id, className, tagName, bookName, bookPrice, bookURL, bookRating");
 webgazer.setRegression('ridge')
         .setTracker('clmtrackr')
         .setGazeListener(function(data, elapsedTime) {
