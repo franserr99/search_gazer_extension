@@ -1,0 +1,38 @@
+findDomElementGoogle = function(x,y){
+    // Get the element at the specified coordinates.
+    const element = document.elementFromPoint(x, y);
+    if(element.id.match("rcnt")||element.className.match("GyAeWb") || element.id.match("rso")){
+      return;
+    }
+
+    console.log("Element ID:", element.id);
+    console.log("Element Class:", element.className);
+    console.log("Element Tag:", element.tagName);
+    console.log("built in api elemnt:",element)
+    // Check if the element is a known Google search result element.
+    const knownElementTypes = ["rso", "g", "_KBh", "hdtbSum", "brs",
+                               "_OKe", "GyAeWb","VuuXrf"];
+    const knownLeafs= ["kb0PBd","cvP2Ce","ieodic","LnCrMe","jGGQ5e","yuRUbf","LicuJb" ,"uhHOwf", "BYbUcd","L3Ezfd","","mgAbYb","OSrXXb"]; 
+    const knownResultNames=["MjjYud"];
+    const knownResultContainerNames=["GyAeWb"];
+
+    if (element != null) {
+      if (knownLeafs.some((type) => element.id.match(type) || element.className.match(type))) {
+        var parent_node = element.parentNode;
+        while (true) { // Using a break condition within the loop to exit
+          if (parent_node.className === knownResultNames[0] || parent_node.id === knownResultNames[0]) {
+            console.log("Found the parent node:", parent_node);
+            console.log("Element ID:", parent_node.id);
+            console.log("Element Class:", parent_node.className);
+            console.log("Element Tag:", parent_node.tagName);
+            break;
+          }
+          parent_node = parent_node.parentNode;
+          if (parent_node == null || parent_node === document) { // Reached the root without finding
+            console.log("Could not find the parent node with the desired name.");
+            break;
+          }
+        }
+      }
+    }
+  };
