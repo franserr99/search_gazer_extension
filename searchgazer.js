@@ -59942,7 +59942,9 @@ var clm = {
     this.start = function (element, box) {
       // check if model is initalized, else return false
       if (typeof model === "undefined") {
-        console.info("tracker needs to be initalized before starting to track.");
+        console.info(
+          "tracker needs to be initalized before starting to track."
+        );
         return false;
       }
       //check if a runnerelement already exists, if not, use passed parameters
@@ -66571,7 +66573,7 @@ const topLevelContainers = [
 // this is the main functions others will use
 findBookCardElement = (x, y, time) => {
   const element = document.elementFromPoint(x, y);
-  if (!element  ||isTopLevelContainer(element) ) return null;
+  if (!element || isTopLevelContainer(element)) return null;
 
   if (isTargetSubtreeRoot(element)) return element;
 
@@ -66589,14 +66591,11 @@ findBookCardElement = (x, y, time) => {
 // takes an arr and some value, checks if that is in the value
 const matchesAnyType = (attributeValue, types) => {
   if (!attributeValue) return false;
-  // split by space, in html you can have more than one class name or id
-  // each will be delim by some space
   const values = attributeValue.split(" ");
   return values.some((value) => types.includes(value));
 };
 
-// main logic to iterate up the dom tree
-const findParentNodeMatch = (element,  x, y, time) => {
+const findParentNodeMatch = (element, x, y, time) => {
   if (isKnownLeaf(element)) {
     let parentNode = element.parentNode;
     while (
@@ -66605,16 +66604,15 @@ const findParentNodeMatch = (element,  x, y, time) => {
       !isRootOrFailed(parentNode)
     ) {
       parentNode = parentNode.parentNode;
-
     }
-    if(parentNode){
-      logElement(parentNode,  x, y, time);
+    if (parentNode) {
+      logElement(parentNode, x, y, time);
     }
     return parentNode;
   }
   return null;
 };
-// leaf we can iterate up from
+
 const isKnownLeaf = (element) => {
   return (
     matchesAnyType(element.id?.trim(), knownSubTreeLeafs) ||
@@ -66622,7 +66620,6 @@ const isKnownLeaf = (element) => {
   );
 };
 
-// too high in the DOM tree to get meaningful info
 const isTopLevelContainer = (node) => {
   return (
     matchesAnyType(node.className?.trim(), topLevelContainers) ||
@@ -66630,7 +66627,6 @@ const isTopLevelContainer = (node) => {
   );
 };
 
-// the subtree root we are looking for
 const isTargetSubtreeRoot = (node) => {
   return (
     (matchesAnyType(node.className?.trim(), knownSubTreeRoots) ||
@@ -66639,7 +66635,6 @@ const isTargetSubtreeRoot = (node) => {
   );
 };
 
-// check if the traversal has reached the root or failed to find a match.
 const isRootOrFailed = (node) => {
   if (!node || node === document) {
     return true;
@@ -66647,13 +66642,52 @@ const isRootOrFailed = (node) => {
   return false;
 };
 
-// Logging function for elements.
-const logElement = (element,  x, y, time) => {
-  const id = element.id  ?? " ";
+const logElement = (element, x, y, time) => {
+  const id = element.id ?? " ";
   const className = element.className ?? " ";
   const tagName = String(element.tagName) ?? " ";
-  // console.info(x,",",y,",",time ,",",id,",", className, ",", tagName);
-  console.log(x,y,time,id, className , tagName);
+  //console.log("This is the element");
+  //console.log(element.innerHTML);
+  // Get the title
+  var titleElement = element.querySelector(".a-size-base.a-color-base");
+
+  var title = titleElement.textContent.trim().replace(/[,]/g, "");
+
+  // Get the price
+  var priceElement = element.querySelector(
+    ".a-size-mini.a-color-tertiary.a-text-strike"
+  );
+  var price = priceElement.textContent.trim().replace(/[,]/g, "");
+
+  // Get the rating
+  var ratingElement = element.querySelector(
+    ".a-icon.a-icon-star-mini.a-star-mini-4-5 span.a-icon-alt"
+  );
+  var rating = ratingElement.textContent.trim().replace(/[,]/g, "");
+
+  // Get the link for the jpg image
+  var imageLinkElement = element.querySelector(".octopus-pc-item-image-v3");
+  var imageLink = imageLinkElement.getAttribute("src").replace(/[,]/g, "");
+
+  // Output the results
+  //console.log("Title:", title);
+  //console.log("Price:", price);
+  //console.log("Rating:", rating);
+  //console.log("Image Link:", imageLink);
+  const elementInfo = {
+    x,
+    y,
+    time,
+    id,
+    className,
+    tagName,
+    title,
+    price,
+    imageLink,
+    rating,
+  };
+
+  console.log(JSON.stringify(elementInfo));
 };
 
 findDomElementBing = function (x, y) {
